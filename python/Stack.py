@@ -47,13 +47,12 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Test Stack Application")
     parser.add_argument('--fun', nargs='?', default='count_Postifix_expression',
 	                    help="count a Postifix-expression's result")
-    parser.add_argument('--input', nargs='?',default='((())',
-                        help='input test data')
+
     return parser.parse_args()
 
-def balanced_parentheses(args):
-    stack = Stack(len(args.input))
-    for parenthese in args.input:
+def balanced_parentheses(parentheses):
+    stack = Stack(len(parentheses))
+    for parenthese in parentheses:
         if parenthese == '(':
             stack.push(parenthese)
         elif parenthese == ')':
@@ -74,10 +73,10 @@ def count(a,b,op):
     else:
         return a/b   
 
-def count_postifix_expression(args):
+def count_postifix_expression(expression):
     operator = ["+","-","*","/"]
 
-    expression = args.input.strip().split()
+    expression = expression.strip().split()
     stack = Stack(len(expression))
     for item in expression:
         if item not in operator:
@@ -91,10 +90,12 @@ def count_postifix_expression(args):
 
 def main(args):
     if args.fun == 'balanced_parentheses':
-        balanced_parentheses(args)
+        parentheses = input()
+        balanced_parentheses(parentheses)
     
     if args.fun == 'count_postifix_expression':
-        count_postifix_expression(args)
+        expression = input()
+        count_postifix_expression(expression)
 
 if __name__ == "__main__":
     args = parse_args()
