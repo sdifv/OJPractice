@@ -28,7 +28,7 @@ class Stack(object):
 
     def pop(self):
         if self.stack:
-            self.stack.pop()
+            return self.stack.pop()
         else:
             print("NoneItemInStack!")
     
@@ -45,7 +45,7 @@ class Stack(object):
 def parse_args():
     ##解析输入的命令
     parser = argparse.ArgumentParser(description="Test Stack Application")
-    parser.add_argument('--fun', nargs='?', default='count_Postifix_expression',
+    parser.add_argument('--fun', nargs='?', default='balanced_parentheses',
 	                    help="count a Postifix-expression's result")
 
     return parser.parse_args()
@@ -58,7 +58,7 @@ def balanced_parentheses(parentheses):
         elif parenthese == ')':
             stack.pop()
     
-    if stack.size == 0:
+    if stack.size() == 0:
         print('True')
     else:
         print('False')
@@ -90,13 +90,14 @@ def count_postifix_expression(expression):
 
 def main(args):
     if args.fun == 'balanced_parentheses':
-        parentheses = input()
+        parentheses = input("pls input a expression including parentheses:")
         balanced_parentheses(parentheses)
     
     if args.fun == 'count_postifix_expression':
-        expression = input()
+        expression = input("pls input a postifix expression:")
         count_postifix_expression(expression)
 
 if __name__ == "__main__":
     args = parse_args()
+    print(args)
     main(args)
