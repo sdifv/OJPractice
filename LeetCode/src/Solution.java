@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import structure.ListNode;
+import structure.TreeNode;
 
 public class Solution {
 
@@ -126,22 +128,29 @@ public class Solution {
 
   }
 
-}
-
-class ListNode {
-  int val;
-  ListNode next = null;
-
-  ListNode(int val) {
-    this.val = val;
-  }
-
-  //尾插法创建链表
-  public void afterInsert(int index){
-    if(index<5){
-      ListNode newNode = new ListNode(index);
-      next = newNode;
-      newNode.afterInsert(++index);
+  public void Mirror(TreeNode root) {
+    if(root == null){
+      return;
+    }
+    if(root.left == null){
+      root.left = root.right;
+      root.right = null;
+      Mirror(root.left);
+    }
+    else if(root.right == null){
+      root.right = root.left;
+      root.left = null;
+      Mirror(root.right);
+    }
+    else{
+      TreeNode temp = root.left;
+      root.left = root.right;
+      root.right = temp;
+      Mirror(root.right);
+      Mirror(root.left);
     }
   }
+
 }
+
+
