@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import structure.ListNode;
-import structure.TreeNode;
+package solutions;
 
 public class Solution {
 

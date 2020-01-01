@@ -1,3 +1,5 @@
+package solutions;
+
 import structure.ListNode;
 import java.util.ArrayList;
 import java.util.Iterator;
