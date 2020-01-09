@@ -1,3 +1,5 @@
+package solutions;
+
 import structure.TreeNode;
 
 import java.util.ArrayList;

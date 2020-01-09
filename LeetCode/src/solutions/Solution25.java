@@ -1,3 +1,5 @@
+package solutions;
+
 import structure.RandomListNode;
 
 import java.util.HashMap;
