@@ -1,3 +1,4 @@
 *.md
 *.json
 *.class
+/src/Solution.java
