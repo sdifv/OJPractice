@@ -59,9 +59,46 @@
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
+import java.util.Arrays;
+
 class Solution {
     public boolean isValidSudoku(char[][] board) {
+        // board is a 9*9 grid
+        // rows[x][y] == 1: the xth row in board has appeared number y;
+        byte[][] rows = new byte[9][10];
+        // cols[x][y] == 1: the xth col in board has appeard number y;
+        byte[][] cols = new byte[9][10];
+        // subgrid[x] == 1: the number x has appeared number x;
+        byte[] subgrid = new byte[10];
 
+        for(int i=0;i<9;i+=3){
+            for(int j=0;j<9;j+=3){
+                for(int x=0;x<3;x++){
+                    for(int y=0;y<3;y++){
+                        char value = board[i+x][j+y];
+                        if(value!='.'){
+                            int num = value - '0';
+                            if(rows[i+x][num] == 1){
+                                return false;
+                            }
+                            rows[i+x][num] = 1;
+                            if(cols[j+y][num] == 1){
+                                return false;
+                            }
+                            cols[j+y][num] = 1;
+                            if(subgrid[num] == 1){
+                                return false;
+                            }
+                            subgrid[num] = 1;
+                        }else{
+                            continue;
+                        }
+                    }
+                }
+                Arrays.fill(subgrid, (byte) 0);
+            }
+        }
+        return true;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
