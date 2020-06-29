@@ -1,46 +1,64 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 class Solution {
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> allRes = new ArrayList<>();
-        Stack<Integer> curRes = new Stack<>();
+    public String multiply(String num1, String num2) {
 
-        Arrays.sort(candidates);
-        backtrack(allRes, curRes, candidates, target);
+        if(num1.equals("0") | num2.equals("0")){
+            return "0";
+        }
+        List<int[]> resList = new ArrayList<>();
 
-        return allRes;
-    }
-
-    public void backtrack(List<List<Integer>> allRes, Stack<Integer> curRes, int[] candidates, int target) {
-        if (target == 0) {
-            List<Integer> res = new ArrayList<>(curRes);
-            Collections.sort(res);
-            if(!allRes.contains(res)){
-                allRes.add(new ArrayList<>(curRes));
+        for (int i = num1.length()-1; i >= 0 ; i--) {   // 乘数
+            int x = num1.charAt(i) - '0';
+            int[] res = new int[num2.length()];
+            for (int j = num2.length()-1; j >= 0 ; j--) {   // 被乘数
+                int y = num2.charAt(j) - '0';
+                res[j] = x*y;
             }
-            return;
+            resList.add(res);   // 保存每一轮的乘积数组
         }
 
-        for (int i = 0; i < candidates.length; i++) {
-            int value = candidates[i];
-            if (value <= target) {
-                curRes.push(value);
-                target = target - value;
-                backtrack(allRes, curRes, candidates, target);
-                target = target + value;
-                curRes.pop();
-            }else{
-                break;
+        // 将每一轮的乘积数组按位相加
+        List<Integer> ansList = new ArrayList<>();
+        for(int i=0; i<num1.length()+num2.length()-1; i++){
+            int sum = 0;
+            boolean flag = false;
+            for(int j=0; j<resList.size(); j++){
+                int[] arr = resList.get(j);
+                int index = arr.length-(i-j)-1; // 第j个乘积数组中参与累加的元素下标
+                if(index>=0 & index<arr.length){
+                    sum += arr[index];
+                    flag = true;
+                }
+            }
+            if(flag){
+                ansList.add(sum);
             }
         }
+//        System.out.println(ansList);
+        StringBuilder sb = new StringBuilder();
+
+        for(int i=0; i<ansList.size(); i++){
+            int var = ansList.get(i);
+            int x = var%10;
+            sb.append(x);
+            if(var/10!=0){
+                if(i==ansList.size()-1){
+                    ansList.add(var/10);
+                }else{
+                    ansList.set(i+1, ansList.get(i+1)+var/10);
+                }
+            }
+        }
+        return sb.reverse().toString();
     }
 
     public static void main(String[] args) {
-        Solution s= new Solution();
-        int[] candidates = {2,3,6,7};
-        List<List<Integer>> res = s.combinationSum(candidates,7);
-        for(List<Integer> r:res){
-            System.out.println(r);
-        }
+        Solution s = new Solution();
+        String num1 = "0";
+        String num2 = "234563";
+        String res = s.multiply(num1,num2);
+        System.out.println(res);
     }
 }
