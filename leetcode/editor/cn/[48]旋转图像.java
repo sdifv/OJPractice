@@ -57,7 +57,7 @@ class Solution {
                 matrix[j][i] = tmp;
             }
         }
-        // 再将矩阵的各行元素进行逆转
+        // 再将方阵的各行元素进行逆转
         for(int i=0;i<rn;i++){
             for(int j=0;j<cn/2;j++){
                 int tmp = matrix[i][j];
