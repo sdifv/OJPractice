@@ -23,7 +23,25 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public boolean canJump(int[] nums) {
-
+        if(nums[0] == 0 && nums.length>1){
+            return false;
+        }
+        int count = 0;
+        for (int i = 0; i <nums.length-1 ; i++) {   // 最后一位为0不影响
+            if(nums[i]==0){
+                count++;
+                for(int j=0;j<i;j++){
+                    if(nums[j] >= i-j+1){
+                        count--;
+                        break;  // 找到绕过0位置的方案
+                    }
+                }
+            }
+        }
+        if(count == 0){
+            return true;
+        }
+        return false;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
