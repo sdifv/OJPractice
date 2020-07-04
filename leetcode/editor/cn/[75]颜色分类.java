@@ -23,7 +23,27 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public void sortColors(int[] nums) {
+        //定义两个指针
+        int red = 0, blue = nums.length-1;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==0){
+                swap(nums,red,i);
+                red++;  //下一个‘0’的位置
+            }else if(nums[i]==2){
+                swap(nums,blue,i);
+                blue--; //下一个‘2’的位置
+                i--;    //交换过来的数值未知，需要继续判断
+            }
+            if(i>=blue){
+                break;  //排序完毕
+            }
+        }
+    }
 
+    public void swap(int[] nums, int i, int j){
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
