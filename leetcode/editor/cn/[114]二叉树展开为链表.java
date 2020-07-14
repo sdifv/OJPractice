@@ -44,7 +44,26 @@
  */
 class Solution {
     public void flatten(TreeNode root) {
-        
+        while(root!=null){
+            if(root.left==null){
+                // 左子树为空，直接从右子树开始处理
+                root = root.right;
+            }else{
+                // 遍历找到左子树的最右叶子节点leftNode
+                TreeNode leftNode = root.left;
+                while(leftNode.right!=null){
+                    leftNode = leftNode.right;
+                }
+                // 将右子树挂到leftNode的右子树上
+                leftNode.right = root.right;
+                // 将原先的左子树挂到root的右子树上
+                root.right = root.left;
+                // 去除左子树
+                root.left = null;
+                // 指向下一层的根节点
+                root = root.right;
+            }
+        }
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
