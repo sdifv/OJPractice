@@ -35,7 +35,7 @@ class LRUCache {
     private int capacity;
     private LRULinkedHashMap<Integer, Integer> lruLinkedHashMap = new LRULinkedHashMap<>();
     //    LinkedHashMap默认的LRU算法是根据键的进入顺序来定的，对于更新值和获取值的操作是忽视的，
-    //    因此在更新值和获取值时我们需要先把原值删除再添进一个新值
+    //    因此在更新值和获取值时我们需要先把原值删除再添进一个新值，提高优先级
     private class LRULinkedHashMap<K, V> extends LinkedHashMap<K, V> {
         @Override
         protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {

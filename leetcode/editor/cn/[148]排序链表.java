@@ -25,7 +25,42 @@
  */
 class Solution {
     public ListNode sortList(ListNode head) {
-        
+        if(head==null){
+            return null;
+        }
+        ListNode root = new ListNode(head.val);
+        while(head.next!=null){
+            ListNode next = head.next;
+            // 有序插入给定链表的节点，返回新链表的头
+            root = seqInsert(root, new ListNode(next.val));
+            head = next;
+        }
+        return root;
+    }
+
+    public ListNode seqInsert(ListNode root, ListNode node){
+        if(root.val>=node.val){
+            node.next = root;
+            return node;
+        }else {
+            ListNode pre = root;
+            ListNode next = pre.next;
+
+            while(next!=null){
+                if(pre.val<node.val && next.val>=node.val){
+                    // 找到插入点，将node插到pre和next之间
+                    pre.next = node;
+                    node.next = next;
+                    return root;
+                }else{ // pre和next节点的值均小于node,指针后移
+                    pre = next;
+                    next = pre.next;
+                }
+            }
+            // 遍历所有节点，此时pre指向尾节点，还未插入node，则插到最后
+            pre.next = node;
+            return root;
+        }
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
