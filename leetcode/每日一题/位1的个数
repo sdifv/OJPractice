@@ -1,0 +1,16 @@
+public class Solution {
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int n) {
+        int ret = 0;
+        while(n!=0){
+            n &= (n-1);
+            ret++;
+        }
+        return ret;
+    }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+        System.out.println(s.hammingWeight(-3));
+    }
+}
