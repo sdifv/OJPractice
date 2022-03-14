@@ -5,11 +5,12 @@ import java.util.Arrays;
 public class HeapSort {
     public int[] sortArray(int[] nums) {
         buildHeap(nums);
+        System.out.println( Arrays.toString(nums));
         int len = nums.length;
         for(int i = nums.length-1; i>0; i--){
             swap(nums, 0, i);
             len--;
-            heapify(nums, 0, len);
+            sink(nums, 0, len);
         }
         return nums;
     }
@@ -17,7 +18,7 @@ public class HeapSort {
     private void buildHeap(int[] nums){
         int mid = nums.length/2;
         for(int i=mid; i>=0; i--){
-            heapify(nums, i, nums.length);
+            sink(nums, i, nums.length);
         }
     }
 
@@ -35,17 +36,15 @@ public class HeapSort {
         nums[j] = temp;
     }
 
-    private void heapify(int[] nums, int idx, int len){
-        int largetIdx = idx;
-        if(getLeftChild(idx) < len && nums[getLeftChild(idx)] > nums[largetIdx]){
-            largetIdx = getLeftChild(idx);
-        }
-        if(getRightChild(idx) < len && nums[largetIdx] < nums[getRightChild(idx)]){
-            largetIdx = getRightChild(idx);
-        }
-        if(largetIdx != idx){
-            swap(nums, idx, largetIdx);
-            heapify(nums, largetIdx, len);
+    private void sink(int[] nums, int idx, int len){
+        while(getLeftChild(idx) <= len){
+            int largestIdx = getLeftChild(idx);
+            if(getRightChild(idx) < len && nums[largestIdx] < nums[getRightChild(idx)]){
+                largestIdx = getRightChild(idx);
+            }
+            if(nums[idx] > nums[largestIdx]) break;
+            swap(nums, idx, largestIdx);
+            idx = largestIdx;
         }
     }
 

@@ -158,6 +158,8 @@ public class Test {
         long start = System.currentTimeMillis();
         Set<String> set = new HashSet<>();
 //        test.VerifySquenceOfBST(new int[]{1,3,2});
+        String str = "123";
+
         System.out.println(System.currentTimeMillis()-start);
     }
 }
